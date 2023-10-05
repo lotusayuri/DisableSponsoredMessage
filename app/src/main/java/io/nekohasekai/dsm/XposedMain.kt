@@ -15,7 +15,7 @@ class XposedMain : IXposedHookLoadPackage {
         runCatching {
             XposedHelpers.findAndHookMethod(
                 Class.forName(
-                    "org.drinkless.td.libcore.telegram.TdApi\$GetChatSponsoredMessage",
+                    "org.drinkless.tdlib.TdApi\$GetChatSponsoredMessages",
                     false,
                     lpparam.classLoader
                 ),
@@ -28,7 +28,7 @@ class XposedMain : IXposedHookLoadPackage {
                 }
             )
         }.onFailure {
-            Log.e("DisableSponsoredMessage", "hook failed", it)
+            Log.e("DisableSponsoredMessages", "hook failed", it)
         }
     }
 }
