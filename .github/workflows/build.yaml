@@ -1,0 +1,26 @@
+name: android_build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
+        with:
+          ref: main
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 17
+      - name: Build the app
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleRelease --stacktrace
+      - name: Upload APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: dsm-1.1.1
+          path: ./**/*.apk
